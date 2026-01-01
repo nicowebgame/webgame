@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Avoider — Basit Web Oyun</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu" class="overlay">
+    <h1>Runner3D</h1>
+    <p id="menuText">Sol/Sağ ok tuşları veya sola/sağa dokunarak şerit değiştir. Engelden kaç, uzaklaşmaya çalış!</p>
+    <div class="menuRow">
+      <button id="menuSignBtn">Sign in</button>
+      <button id="menuRegisterBtn">Register</button>
+    </div>
+    <p id="best">Best: 0</p>
+    <div style="margin-top:12px;color:#bcd4ff">Or <button id="menuGuestBtn" style="background:transparent;color:#ffd166;border:0;cursor:pointer">Continue as Guest</button></div>
+  </div>
+
+  <!-- Login / Register Modal -->
+  <div id="authModal" class="overlay" style="display:none">
+    <h2>Hesap</h2>
+    <input id="authUser" placeholder="Kullanıcı adı" style="padding:8px 10px;border-radius:8px;border:0;width:220px" />
+    <input id="authPass" type="password" placeholder="Şifre" style="padding:8px 10px;border-radius:8px;border:0;width:220px" />
+    <label style="margin-top:6px"><input id="rememberMe" type="checkbox" /> Remember me (store locally)</label>
+    <div class="menuRow">
+      <button id="registerBtn">Kayıt Ol</button>
+      <button id="loginBtn">Giriş Yap</button>
+      <button id="guestBtn">Continue as Guest</button>
+      <button id="closeAuth">Kapat</button>
+    </div>
+    <p style="color:#bcd4ff;max-width:420px;text-align:center">Hesaplar tarayıcı `localStorage` içinde saklanır (yerel).</p>
+  </div>
+
+    <div class="wrap">
+    <div id="gameContainer"></div>
+    <div id="hud" class="hud">Score: <span id="score">0</span></div>
+      <div id="bestHud" class="best-hud">Best: <span id="bestValue">0</span></div>
+    <div id="speedo" class="speedo">
+      <svg viewBox="0 0 100 100" class="speedo-svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="45" class="speedo-ring"/>
+        <line id="needle" x1="50" y1="50" x2="50" y2="15" class="needle" stroke-linecap="round"/>
+      </svg>
+      <div class="speedo-label"><span id="speedValue">0</span> km/h</div>
+    </div>
+    <div id="speedEffectLeft" class="speed-effect left"></div>
+    <div id="speedEffectRight" class="speed-effect right"></div>
+  </div>
+
+  <!-- Leaderboard / Account info top-right -->
+  <div id="topPanel" class="top-panel">
+    <div id="userBox" class="user-box">Not signed in — <button id="openAuth">Sign in</button></div>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <div id="audioControl" class="audio-control">🔊 <button id="audioToggle">Mute</button> <input id="audioVol" type="range" min="0" max="1" step="0.01" value="0.6" style="width:90px"/></div>
+      <div style="display:flex;align-items:center"> <button id="christmasToggle">❄️ Christmas</button></div>
+    </div>
+    <div id="leaderboard" class="leaderboard"><h4>Top Players</h4><ol id="leaders"></ol></div>
+  </div>
+
+  <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
